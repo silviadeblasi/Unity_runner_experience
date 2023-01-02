@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Animations/_Scenes/LauraScene.unity
+    guid: 922fd82d0ea564332881d5daf760903d
+  - enabled: 1
+    path: Assets/_Animations/_Scenes/MainMenu.unity
+    guid: edf40a76cd9934f4398dd2a0daabf908
+  - enabled: 1
+    path: Assets/_Animations/_Scenes/Loading.unity
+    guid: 1f2d145f7b2904f5c9fc91345ecc3f78
+  - enabled: 1
+    path: Assets/_Animations/_Scenes/AgneseScene.unity
+    guid: 572654ea39ae6472292096c3e566a6c3
+  - enabled: 1
+    path: Assets/_Animations/_Scenes/EdoScene.unity
+    guid: 84384a046175e4733b65e7fa05b28a3e
+  - enabled: 1
+    path: Assets/_Animations/_Scenes/SilviaScene.unity
+    guid: 316ed2edfb468449980c70a18d6443e0
+  m_configObjects: {}
