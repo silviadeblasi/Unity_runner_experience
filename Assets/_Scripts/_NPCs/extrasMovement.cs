@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.VersionControl;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class extrasMovement : MonoBehaviour
     //public List<Transform> waypoints;
 
     private NavMeshAgent _navMeshAgent;
+    [SerializeField] private Collider _groundCollider;
     [SerializeField] private GameObject _player;
     [SerializeField] private Animator _animator;
 
@@ -29,7 +31,7 @@ public class extrasMovement : MonoBehaviour
         if(_navMeshAgent != null)
         {
             _navMeshAgent.speed = _speed;
-            _navMeshAgent.SetDestination(RandomDestination());
+            SetDestination();
         }
 
     }
@@ -38,38 +40,36 @@ public class extrasMovement : MonoBehaviour
     void Update()
     {
         _isNear = IsTargetWithinDistance(_stoppingDistance);
-        if (_navMeshAgent != null && !_isNear)
+        if ((_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance) && !_isNear)
         {
-            _navMeshAgent.speed = _speed;
+            _navMeshAgent.isStopped = false;
             ChangeAnimation(_isNear);
-            _navMeshAgent.SetDestination(RandomDestination());
+            SetDestination();
         }
-        else
+        else if((_navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance) && _isNear)
         {
-            _navMeshAgent.SetDestination(_navMeshAgent.transform.position);
-            Stop();
+            Talk();
+            ChangeAnimation(_isNear);
+        } else if ((_navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance) && !_isNear)
+        {
+            _navMeshAgent.isStopped = false;
             ChangeAnimation(_isNear);
         }
     }
 
 
-    private Vector3 RandomDestination()
+    private void SetDestination()
     {
-        Vector3 finalPosition = Vector3.zero;
-        Vector3 randomPosition = Random.insideUnitSphere * walkRadius;
-        randomPosition += transform.position;
-
-        if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, walkRadius, 1))
-        {
-            finalPosition = hit.position;
-        }
-        return finalPosition;
+       NavMeshPath path = new NavMeshPath();
+       Vector3 RandomPosition = GetRandomPositionOnGround();
+        //_navMeshAgent.CalculatePath(randomPosition, path);
+        _navMeshAgent.SetDestination(RandomPosition);
+        Debug.Log(_navMeshAgent.path);
     }
 
-    private void Stop()
+    private void Talk()
     {
-        _navMeshAgent.speed = 0;
-
+        _navMeshAgent.isStopped = true;
         Vector3 targetDirection = _player.transform.position - transform.position;
         targetDirection.y = 0;
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
@@ -93,5 +93,12 @@ public class extrasMovement : MonoBehaviour
             _animator.SetBool("isNear", false);
         }
 
+    }
+
+    public Vector3 GetRandomPositionOnGround()
+    {
+        Vector3 min = _groundCollider.bounds.min;
+        Vector3 max = _groundCollider.bounds.max;
+        return new Vector3(Random.Range(min.x, max.x), 2f, Random.Range(min.z, max.z));
     }
 }
