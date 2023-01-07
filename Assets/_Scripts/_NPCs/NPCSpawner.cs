@@ -25,7 +25,7 @@ public class NPCSpawner : MonoBehaviour
             if (_agents.Count.Equals(1))
                 _type = 0;
             else
-                _type = Random.Range(0, _navMeshAgentsToSpawn - 1);
+                _type = Random.Range(0, _agents.Count -1 );
             GameObject agent = Instantiate(_agents[_type], GetRandomPositionOnGround(), Quaternion.identity);
         }
     }
