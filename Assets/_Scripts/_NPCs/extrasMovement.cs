@@ -49,7 +49,7 @@ public class extrasMovement : MonoBehaviour
         else if((_navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance) && _isNear)
         {
             Talk();
-            ChangeAnimation(_isNear);
+            //ChangeAnimation(_isNear);
         } else if ((_navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance) && !_isNear)
         {
             _navMeshAgent.isStopped = false;
@@ -73,7 +73,9 @@ public class extrasMovement : MonoBehaviour
         Vector3 targetDirection = _player.transform.position - transform.position;
         targetDirection.y = 0;
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 150f * Time.deltaTime); 
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 150f * Time.deltaTime);
+        if(transform.rotation.Equals(targetRotation))
+         ChangeAnimation(_isNear);
     }
 
     private bool IsTargetWithinDistance(float distance)
