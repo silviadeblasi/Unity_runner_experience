@@ -4,8 +4,23 @@ ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
-      74: -4791504522942941401
-    second: Armature|Armature|mixamo.com|Layer0
+      74: 3787175245205227387
+    second: Armature.003|Armature.001|mixamo.com|Layer0
+  - first:
+      74: 2413935595439080513
+    second: Armature.003|Armature.003|mixamo.com|Layer0
+  - first:
+      74: -8500319796296858554
+    second: Armature.003|Armature|mixamo.com|Layer0
+  - first:
+      74: -7794612100412726128
+    second: Armature.003|Armature|mixamo.com|Layer0.001
+  - first:
+      74: 7927576291047565188
+    second: Armature.003|Armature|mixamo.com|Layer0.002
+  - first:
+      74: -7491411059659112372
+    second: Armature.003|Armature|mixamo.com|Layer0.003
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -79,7 +94,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 1
+  importAnimation: 0
   humanDescription:
     serializedVersion: 3
     human: []
@@ -92,7 +107,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: Armature.003
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
